@@ -1,0 +1,1 @@
+web: java -jar target/cheffy.jar clojure.main -m cheffy.server "resources/config.edn"
