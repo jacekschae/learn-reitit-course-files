@@ -1,4 +1,4 @@
-![alt learn-reitit-logo](https://res.cloudinary.com/schae/image/upload/f_auto,q_auto/v1598363685/learnreitit.com/1200x600-podia-reitit-pro.png)
+![alt learn-reitit-logo](https://res.cloudinary.com/schae/image/upload/f_auto,q_80,r_12/v1601822305/learnreitit.com/1200x640-learn-reitit.png)
 
 # [LearnReitit.com](https://www.learnreframe.com)
 
