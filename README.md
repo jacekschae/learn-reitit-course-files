@@ -1,6 +1,6 @@
 ![alt learn-reitit-logo](https://res.cloudinary.com/schae/image/upload/f_auto,q_80,r_12/v1601822305/learnreitit.com/1200x640-learn-reitit.png)
 
-# [LearnReitit.com](https://www.learnreframe.com)
+# [LearnReitit.com](https://www.learnreitit.com)
 
 Learn how to build robust REST API with Clojure by composing libraries including Reitit, Ring, Integrant, and next.jdbc. The service exposes Recipes, Conversations, and Accounts, everything documented with Swagger. Our REST API service exposes multiple endpoints with JWT for Auth—backed by Auth0. Serving JSON, Transit (msgpack, json), or EDN from PostgreSQL, and is hosted on Heroku.
 
