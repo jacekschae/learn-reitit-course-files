@@ -2,4 +2,5 @@ increments/**/.nrepl-port
 increments/**/cheffy.iml
 increments/**/target/
 increments/**/*.md
+increments/**/resources/config.md
 .idea
