@@ -1,7 +1,0 @@
-{:server/jetty      {:handler #ig/ref :cheffy/app
-                     :port    3030}
- :cheffy/app        {:db #ig/ref :db/postgres}
- :db/postgres       {:db "jdbc:postgresql://ec2-54-217-224-85.eu-west-1.compute.amazonaws.com:5432/d8cbu3s3uchht3?user=sckqmvwwobpagh&password=456ac612f22ea47bace4214d24eb8baabd423011a1ceefed0c86dcdd3d743e94&sslmode=require"}
- :auth0/manage-user {:client-id     "082dvVyVYgRzrvvH87As4l0G8DuUdV0z"
-                     :client-secret "xQ2ooIvV3cHYUWUqb0IMb3gJULBAN-i-h1K40iNps-ukUOlHu5Ve1aa_xT_MZ3zV"
-                     :domain        "schae.auth0.com"}}
