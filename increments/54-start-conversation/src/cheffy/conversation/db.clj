@@ -26,8 +26,8 @@
             :conversation/with-picture picture))))))
 
 (defmethod dispatch :find-messages-by-conversation
-  [[_ db conversation-id]]
-  (sql/find-by-keys db :message conversation-id))
+  [[_ db conversation]]
+  (sql/find-by-keys db :message conversation))
 
 (defmethod dispatch :insert-message
   [[_ db {:keys [conversation-id from to] :as data}]]
