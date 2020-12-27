@@ -3,16 +3,16 @@
 
 (defn routes
   [env]
-  (let [db (:db env)]
+  (let [db (:jdbc-url env)]
     ["/conversation" {:swagger    {:tags ["conversations"]}
                       :middleware [[mw/wrap-auth0]]}
      [""
       {:get  {:handler   (fn [request] request)
-              :responses {200 {:body seq?}}
+              :responses {200 {:body vector?}}
               :summary   "List conversations"}
        :post {:handler    (fn [request] request)
               :parameters {:body {:message-body string? :to string?}}
-              :responses  {201 {:body nil?}}
+              :responses  {201 {:body {:conversation-id string?}}}
               :summary    "Start a conversation"}}]
      ["/:conversation-id"
       {:get  {:handler    (fn [request] request)
@@ -22,7 +22,7 @@
        :post {:handler    (fn [request] request)
               :parameters {:path {:conversation-id string?}
                            :body {:message-body string? :to string?}}
-              :responses  {201 {:body nil?}}
+              :responses  {201 {:body {:conversation-id string?}}}
               :summary    "Create message"}
        :put  {:handler    (fn [request] request)
               :parameters {:path {:conversation-id string?}}
