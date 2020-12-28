@@ -34,11 +34,14 @@
                                   message (-> request :parameters :body)
                                   message-id (str (UUID/randomUUID))
                                   from (-> request :claims :sub)]
-                              (conversation-db/dispatch [:insert-message db (assoc message
-                                                                              :message-id message-id
-                                                                              :conversation-id conversation-id
-                                                                              :from from)])
-                              (rr/created (str responses/base-url "v1/convesations/" conversation-id) {:conversation-id conversation-id})))
+                              (conversation-db/dispatch
+                                [:insert-message db (assoc message
+                                                      :message-id message-id
+                                                      :conversation-id conversation-id
+                                                      :from from)])
+                              (rr/created
+                                (str responses/base-url "/v1/conversations" conversation-id)
+                                {:conversation-id conversation-id})))
               :parameters {:path {:conversation-id string?}
                            :body {:message-body string? :to string?}}
               :responses  {201 {:body {:conversation-id string?}}}
