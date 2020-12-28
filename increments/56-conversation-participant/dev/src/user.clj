@@ -27,7 +27,6 @@
   (reset)
 
 
-
   (with-open [conn (jdbc/get-connection db)]
     (let [conn-opts (jdbc/with-options conn (:options db))
           conversations (sql/find-by-keys conn-opts :conversation {:uid "auth0|5fe31324a2914d006f574ceb"})]
