@@ -14,7 +14,7 @@
       {:get  {:handler   (fn [request]
                            (let [uid (-> request :claims :sub)]
                              (rr/response
-                               (conversation-db/dispatch [:find-conversation-by-uid db {:uid uid}]))))
+                              (conversation-db/dispatch [:find-conversation-by-uid db {:uid uid}]))))
               :responses {200 {:body vector?}}
               :summary   "List conversations"}
        :post {:handler    (fn [request]
@@ -22,12 +22,12 @@
                                   message-id (str (UUID/randomUUID))
                                   from (-> request :claims :sub)
                                   conversation-id (conversation-db/dispatch
-                                                    [:start-conversation db (assoc message
-                                                                              :message-id message-id
-                                                                              :from from)])]
+                                                   [:start-conversation db (assoc message
+                                                                                  :message-id message-id
+                                                                                  :from from)])]
                               (rr/created
-                                (str responses/base-url "/v1/conversations/" conversation-id)
-                                {:conversation-id conversation-id})))
+                               (str responses/base-url "/v1/conversations/" conversation-id)
+                               {:conversation-id conversation-id})))
               :parameters {:body {:message-body string? :to string?}}
               :responses  {201 {:body {:conversation-id string?}}}
               :summary    "Start a conversation"}}]
@@ -36,7 +36,7 @@
        {:get  {:handler    (fn [request]
                              (let [conversation-id (-> request :parameters :path :conversation-id)]
                                (rr/response
-                                 (conversation-db/dispatch [:find-messages-by-conversation db {:converstaion-id conversation-id}]))))
+                                (conversation-db/dispatch [:find-messages-by-conversation db {:conversation-id conversation-id}]))))
                :parameters {:path {:conversation-id string?}}
                :responses  {200 {:body vector?}}
                :summary    "List conversation messages"}
@@ -46,19 +46,19 @@
                                    message-id (str (UUID/randomUUID))
                                    from (-> request :claims :sub)]
                                (conversation-db/dispatch
-                                 [:insert-message db (assoc message
-                                                       :message-id message-id
-                                                       :conversation-id conversation-id
-                                                       :from from)])
+                                [:insert-message db (assoc message
+                                                           :message-id message-id
+                                                           :conversation-id conversation-id
+                                                           :from from)])
                                (rr/created
-                                 (str responses/base-url "/v1/conversations" conversation-id)
-                                 {:conversation-id conversation-id})))
+                                (str responses/base-url "/v1/conversations" conversation-id)
+                                {:conversation-id conversation-id})))
                :parameters {:path {:conversation-id string?}
                             :body {:message-body string? :to string?}}
                :responses  {201 {:body {:conversation-id string?}}}
                :summary    "Create message"}
         :put  {:handler    (fn [request]
-                             (let [uid (-> request :claims :uid)
+                             (let [uid (-> request :claims :sub)
                                    conversation-id (-> request :parameters :path :conversation-id)
                                    updated? (conversation-db/dispatch [:clear-notifications db {:uid uid :conversation-id conversation-id}])]
                                (when updated?
