@@ -24,16 +24,15 @@
   (testing "Create message"
     (testing "without conversation"
       (let [{:keys [status body]} (ts/test-endpoint :post "/v1/conversation"
-                                    {:auth true :body {:to "mike@mailinator.com"
-                                                       :message-body "Test Message"}})]
-        (clojure.pprint/pprint body)
+                                                    {:auth true :body {:to "mike@mailinator.com"
+                                                                       :message-body "Test Message"}})]
         (reset! conversation-id (:conversation-id body))
         (is (= 201 status))))
 
     (testing "with conversation"
-      (let [{:keys [status]} (ts/test-endpoint :post (str "/v1/conversation/" @conversation-id)
-                               {:auth true :body {:to "mike@mailinator.com"
-                                                  :message-body "Second Test Message"}})]
+      (let [{:keys [status body]} (ts/test-endpoint :post (str "/v1/conversation/" @conversation-id)
+                                                    {:auth true :body {:to "mike@mailinator.com"
+                                                                       :message-body "Second Test Message"}})]
         (is (= 201 status)))))
 
   (testing "List user conversations"
@@ -43,14 +42,11 @@
 
   (testing "List conversation messages"
     (let [{:keys [status body]} (ts/test-endpoint :get (str "/v1/conversation/" @conversation-id)
-                                  {:auth true})]
+                                                  {:auth true})]
       (is (= 200 status))
       (is (= (:messages/conversation_id (first body) @conversation-id)))))
 
   (testing "Clear notifications"
     (let [{:keys [status]} (ts/test-endpoint :put (str "/v1/conversation/" @conversation-id)
-                             {:auth true})]
+                                             {:auth true})]
       (is (= 204 status)))))
-
-
-
