@@ -4,3 +4,5 @@ increments/**/target/
 increments/**/*.md
 increments/**/resources/config.edn
 .idea
+.clj-kondo/
+.lsp/
